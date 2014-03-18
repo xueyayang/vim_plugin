@@ -1,4 +1,29 @@
 set nocompatible
+filetype off
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+"Vundle itself
+Bundle 'gmarik/vundle'
+
+"NerdTree
+Bundle 'git@github.com:scrooloose/nerdtree.git'
+
+"minibufexpl
+Bundle 'git@github.com:fholgado/minibufexpl.vim.git'
+
+"syntastic
+Bundle 'git@github.com:scrooloose/syntastic.git'
+
+"ultisnips
+Bundle 'git@github.com:SirVer/ultisnips.git'
+
+"vim-markdown
+Bundle 'plasticboy/vim-markdown'
+
+filetype plugin indent on
+
 set backspace=indent,eol,start
 syntax on
 colorscheme desert
@@ -30,7 +55,7 @@ function! LoadCscope()
 endfunction
 au BufEnter /* call LoadCscope()
 
-call pathogen#infect()
+"call pathogen#infect()
 
 command! -complete=shellcmd -nargs=+ Shell call s:RunShellCommand(<q-args>)
 function! s:RunShellCommand(cmdline)
