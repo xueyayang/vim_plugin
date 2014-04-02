@@ -22,6 +22,12 @@ Bundle 'git@github.com:SirVer/ultisnips.git'
 "vim-markdown
 Bundle 'plasticboy/vim-markdown'
 
+"vim-operator highlight
+Bundle 'git@github.com:Valloric/vim-operator-highlight.git'
+
+"vim-airline
+Bundle 'bling/vim-airline'
+
 filetype plugin indent on
 
 set backspace=indent,eol,start
