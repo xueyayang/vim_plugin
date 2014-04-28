@@ -13,6 +13,9 @@ Bundle 'git@github.com:scrooloose/nerdtree.git'
 "minibufexpl
 Bundle 'git@github.com:fholgado/minibufexpl.vim.git'
 
+"taglist
+Bundle 'git@github.com:vim-scripts/taglist.vim.git'
+
 "syntastic
 Bundle 'git@github.com:scrooloose/syntastic.git'
 
@@ -27,6 +30,9 @@ Bundle 'git@github.com:Valloric/vim-operator-highlight.git'
 
 "vim-airline
 Bundle 'bling/vim-airline'
+
+"YouCompleteMe
+"Bundle 'Valloric/YouCompleteMe'
 
 filetype plugin indent on
 
@@ -46,9 +52,8 @@ set cindent
 "set tags+=/home/znuser/ZienonTechnology/ThirdPartyLibrary/axis2c-src-1.6.0/tags
 "set tags+=/home/znuser/ZienonTechnology/ObjDetectorFramework/tags
 
-au BufNewFile,BufRead *.txt set filetype=c
 
-set guifont=Andale\ Mono\ 12
+set guifont=Andale\ Mono\ 13
 
 function! LoadCscope()
   let db = findfile("cscope.out", ".;")
@@ -88,11 +93,12 @@ endfunction
 "nnoremap <silent><Leader><C-]> <C-w><C-]><C-w>T
 nnoremap <C-]> <C-w><C-]><C-w>T
 
+let g:syntastic_mode_map = { 'mode': 'active',
+			\ 'active_filetypes': ['ruby', 'php'],
+			\ 'passive_filetypes': ['txt'] }
 let g:vim_markdown_folding_disable=1
 let g:UltiSnipsExpandTrigger="<c-l>"
 "let g:UltiSnipsJumpForwardTrigger="<tab>"
 "let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 "set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
 "set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}
-set laststatus=2
-set statusline=[%n]\ %<%F\ \ \ [%M%R%H%W%Y][%{&ff}]\ \ %=\ line:%l/%L\ col:%c\ \ \ %p%%\ \ \ @%{strftime(\"%H:%M:%S\")}
