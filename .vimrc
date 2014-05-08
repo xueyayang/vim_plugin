@@ -93,10 +93,7 @@ endfunction
 "nnoremap <silent><Leader><C-]> <C-w><C-]><C-w>T
 nnoremap <C-]> <C-w><C-]><C-w>T
 
-let g:syntastic_mode_map = { 'mode': 'active',
-			\ 'active_filetypes': ['ruby', 'php'],
-			\ 'passive_filetypes': ['txt'] }
-let g:vim_markdown_folding_disable=1
+let g:vim_markdown_folding_disabled=1
 let g:UltiSnipsExpandTrigger="<c-l>"
 "let g:UltiSnipsJumpForwardTrigger="<tab>"
 "let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
