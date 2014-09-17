@@ -1,40 +1,56 @@
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 "Vundle itself
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
 "NerdTree
-Bundle 'git@github.com:scrooloose/nerdtree.git'
+Plugin 'git@github.com:scrooloose/nerdtree.git'
 
 "minibufexpl
-Bundle 'git@github.com:fholgado/minibufexpl.vim.git'
+Plugin 'git@github.com:fholgado/minibufexpl.vim.git'
 
 "taglist
-Bundle 'git@github.com:vim-scripts/taglist.vim.git'
+Plugin 'git@github.com:vim-scripts/taglist.vim.git'
 
 "syntastic
-Bundle 'git@github.com:scrooloose/syntastic.git'
+Plugin 'git@github.com:scrooloose/syntastic.git'
 
 "ultisnips
-Bundle 'git@github.com:SirVer/ultisnips.git'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<c-l>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 
 "vim-markdown
-Bundle 'plasticboy/vim-markdown'
+Plugin 'plasticboy/vim-markdown'
 
 "vim-operator highlight
-Bundle 'git@github.com:Valloric/vim-operator-highlight.git'
+Plugin 'git@github.com:Valloric/vim-operator-highlight.git'
 
 "vim-airline
-Bundle 'bling/vim-airline'
+Plugin 'bling/vim-airline'
 
 "YouCompleteMe
-"Bundle 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 
-filetype plugin indent on
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" vundle end
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+
 
 set backspace=indent,eol,start
 syntax on
@@ -51,6 +67,7 @@ set cindent
 
 "set tags+=/home/znuser/ZienonTechnology/ThirdPartyLibrary/axis2c-src-1.6.0/tags
 "set tags+=/home/znuser/ZienonTechnology/ObjDetectorFramework/tags
+au BufRead,BufNewFile *.wsgi set ft=python
 
 
 set guifont=Andale\ Mono\ 13
@@ -94,7 +111,7 @@ endfunction
 nnoremap <C-]> <C-w><C-]><C-w>T
 
 let g:vim_markdown_folding_disabled=1
-let g:UltiSnipsExpandTrigger="<c-l>"
+"let g:UltiSnipsExpandTrigger="<c-l>"
 "let g:UltiSnipsJumpForwardTrigger="<tab>"
 "let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 "set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
