@@ -64,6 +64,7 @@ set cino=g0
 set autochdir 
 set hlsearch 
 set cindent
+set relativenumber
 
 "set tags+=/home/znuser/ZienonTechnology/ThirdPartyLibrary/axis2c-src-1.6.0/tags
 "set tags+=/home/znuser/ZienonTechnology/ObjDetectorFramework/tags
