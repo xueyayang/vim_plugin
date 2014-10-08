@@ -7,6 +7,12 @@ call vundle#begin()
 "Vundle itself
 Plugin 'gmarik/vundle'
 
+"Colorscheme package
+Plugin 'flazz/vim-colorschemes'
+
+" cpp syntax
+Plugin 'octol/vim-cpp-enhanced-highlight'
+
 "NerdTree
 Plugin 'git@github.com:scrooloose/nerdtree.git'
 
@@ -54,7 +60,14 @@ filetype plugin indent on    " required
 
 set backspace=indent,eol,start
 syntax on
-colorscheme desert
+if has('gui_running')
+	"let g:ophigh_color_gui="#8A2BE2"
+	let g:ophigh_color_gui="#CD2626"
+	set background=light
+else
+	set background=dark
+endif
+colorscheme solarized
 set nu
 set tw=78
 set tabstop=4
