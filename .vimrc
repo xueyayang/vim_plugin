@@ -60,14 +60,25 @@ filetype plugin indent on    " required
 
 set backspace=indent,eol,start
 syntax on
-if has('gui_running')
-	"let g:ophigh_color_gui="#8A2BE2"
-	let g:ophigh_color_gui="#CD2626"
-	set background=light
-else
-	set background=dark
+
+"1 Monokai
+"2 desert
+"3 solarized
+let themechoose=3
+if themechoose == 1
+	colorscheme Monokai
+elseif themechoose == 2
+	colorscheme desert
+else 
+	colorscheme solarized
+	if has('gui_running')
+		"let g:ophigh_color_gui="#8A2BE2"
+		let g:ophigh_color_gui="#CD2626"
+		set background=light
+	else
+		set background=dark
+	endif
 endif
-colorscheme solarized
 set nu
 set tw=78
 set tabstop=4
