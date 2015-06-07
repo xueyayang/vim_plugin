@@ -135,6 +135,11 @@ endfunction
 "nnoremap <silent><Leader><C-]> <C-w><C-]><C-w>T
 nnoremap <C-]> <C-w><C-]><C-w>T
 
+" swap the word seprate by colon. 
+" e.g.  first : second -->  second first
+command -range Swap :<line1>,<line2>s/\(\w\+\)\s:\s*\(\w\+\)/\2 \1/g 
+
+
 let g:vim_markdown_folding_disabled=1
 "let g:UltiSnipsExpandTrigger="<c-l>"
 "let g:UltiSnipsJumpForwardTrigger="<tab>"
