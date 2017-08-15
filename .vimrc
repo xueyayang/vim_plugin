@@ -5,48 +5,31 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 "Vundle itself
-Plugin 'gmarik/vundle'
+"Plugin 'gmarik/vundle'
 
 "Colorscheme package
 Plugin 'flazz/vim-colorschemes'
 
-" cpp syntax
-Plugin 'octol/vim-cpp-enhanced-highlight'
-
-"NerdTree
-Plugin 'git@github.com:scrooloose/nerdtree.git'
-
 "minibufexpl
-Plugin 'git@github.com:fholgado/minibufexpl.vim.git'
-
-"taglist
-Plugin 'git@github.com:vim-scripts/taglist.vim.git'
-
-"syntastic
-Plugin 'git@github.com:scrooloose/syntastic.git'
-
-"ultisnips
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<c-l>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-
-"vim-markdown
-Plugin 'plasticboy/vim-markdown'
-
-"vim-operator highlight
-Plugin 'git@github.com:Valloric/vim-operator-highlight.git'
+Plugin 'https://github.com/fholgado/minibufexpl.vim'
 
 "vim-airline
 Plugin 'bling/vim-airline'
 
-"YouCompleteMe
-Plugin 'Valloric/YouCompleteMe'
+"NerdTree
+Plugin 'https://github.com/scrooloose/nerdtree.git'
+
+"ultisnips
+Plugin 'SirVer/ultisnips'
+
+" cpp syntax
+"Plugin 'octol/vim-cpp-enhanced-highlight'
+
+"syntastic
+Plugin 'https://github.com/scrooloose/syntastic.git'
+
+"vim-markdown
+"Plugin 'plasticboy/vim-markdown'
 
 
 " All of your Plugins must be added before the following line
@@ -54,8 +37,6 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 " vundle end
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
 
 
 set backspace=indent,eol,start
@@ -66,18 +47,18 @@ syntax on
 "3 solarized
 let themechoose=3
 if themechoose == 1
-	colorscheme Monokai
+  colorscheme Monokai
 elseif themechoose == 2
-	colorscheme desert
+  colorscheme desert
 else 
-	colorscheme solarized
-	if has('gui_running')
-		"let g:ophigh_color_gui="#8A2BE2"
-		let g:ophigh_color_gui="#CD2626"
-		set background=light
-	else
-		set background=dark
-	endif
+  colorscheme solarized
+  if has('gui_running')
+    "let g:ophigh_color_gui="#8A2BE2"
+    let g:ophigh_color_gui="#CD2626"
+    set background=light
+  else
+    set background=dark
+  endif
 endif
 set nu
 set tw=78
