@@ -9,7 +9,7 @@ endif
 
 " Disable GUI Tabline
 if exists(':GuiTabline')
-    GuiTabline 1
+    GuiTabline 2
 endif
 
 " Disable GUI Popupmenu
@@ -20,6 +20,10 @@ endif
 " Enable GUI ScrollBar
 if exists(':GuiScrollBar')
     GuiScrollBar 1
+endif
+
+if exists(':GuiAdaptiveColor')
+    GuiAdaptiveColor 1
 endif
 
 " Right Click Context Menu (Copy-Cut-Paste)
