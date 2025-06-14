@@ -1,7 +1,7 @@
 -- check where to put this file
 -- 		echo stdpath('config')  
 -- put the below line to $vimrc
--- 		vim.api.nvim_set_keymap('i', '<Esc>', [[<Cmd>lua require('im_toggle').toggleIme()<CR><Esc>]], { noremap = true, silent = true })
+-- 		vim.api.nvim_set_keymap('i', '<Esc>', [[<Cmd>lua require('im_toggle').onEsc()<CR><Esc>]], { noremap = true, silent = true })
 --
 local ffi = require("ffi")
 
@@ -16,6 +16,7 @@ ffi.cdef[[
     LRESULT SendMessageA(HWND hWnd, unsigned int Msg, WPARAM wParam, LPARAM lParam);
     void* LoadKeyboardLayoutA(const char* pwszKLID, unsigned int Flags);
     void* ActivateKeyboardLayout(void* hkl, unsigned int Flags);
+    void keybd_event(unsigned char bVk, unsigned char bScan, unsigned long dwFlags, void* dwExtraInfo);
 ]]
 
 local user32 = ffi.load("user32")
@@ -25,6 +26,8 @@ local KLF_ACTIVATE = 0x00000001
 local IMC_GETOPENSTATUS = 0x00000005
 local IMC_SETOPENSTATUS = 0x00000006
 local WM_IME_CONTROL = 0x0283
+local VK_SHIFT = 0x10
+local KEYEVENTF_KEYUP = 0x0002
 
 -- Function to get IME window
 local function getIme()
@@ -45,6 +48,7 @@ end
 local function getInputMethod()
     local ime = getIme()
     local status = user32.SendMessageA(ime, WM_IME_CONTROL, IMC_GETOPENSTATUS, ffi.cast("LPARAM", 0))
+    print("IME stataus: " .. tostring(status))
     return status ~= ffi.cast("LPARAM", 0) and "on" or "off"
 end
 
@@ -54,26 +58,37 @@ local function activateIm()
 end
 
 -- Function to deactivate IME
+-- 测试发现，0 会进入“五笔” 的英文模式， 1 不会改变，中还是中，英还是英
 local function inactivateIm()
     setIme(0)
 end
 
--- Function to toggle IME
-local function toggleIme()
-	print("xue: toggleIme...")
-    local currentIm = getInputMethod()
-    if currentIm == "on" then
-        print("Disabling IME...")
-        inactivateIm()
-        print("IME Disabled.")
-    else
-        print("Enabling IME...")
-        activateIm()
-        print("IME Enabled.")
-    end
+
+-- 用于模拟中/英切换状态，true = 中文，false = 英文
+local ime_sub_mode = true
+
+-- 模拟按键：Shift
+local function pressShiftKey()
+    user32.keybd_event(VK_SHIFT, 0, 0, nil)              -- 按下 Shift
+    user32.keybd_event(VK_SHIFT, 0, KEYEVENTF_KEYUP, nil) -- 松开 Shift
+
+    -- 切换状态变量
+    ime_sub_mode = not ime_sub_mode
+    local mode_text = ime_sub_mode and "中" or "英"
+    print("IME Mode: " .. mode_text)
+end
+
+
+local function onEsc()
+    inactivateIm()
+end
+
+-- press i or a to insert mode
+local function onInsert()
+    pressShiftKey()
 end
 
 return {
-    toggleIme = toggleIme
+    onEsc = onEsc,
+    onInsert = onInsert,
 }
-
