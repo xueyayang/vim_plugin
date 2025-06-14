@@ -1,7 +1,7 @@
 set nocompatible
 filetype off
 
-set rtp+=~/nvim/bundle/Vundle.vim
+set rtp+=~/AppData/Local/nvim/Vundle.vim
 call vundle#begin()
 
 "Vundle itself
@@ -21,8 +21,8 @@ Plugin 'flazz/vim-colorschemes'
 "minibufexpl
 "Plugin 'https://github.com/fholgado/minibufexpl.vim'
 
-"vim-airline
-Plugin 'vim-airline/vim-airline'
+"lua-line
+Plugin	'nvim-lualine/lualine.nvim'
 
 "NerdTree
 Plugin 'https://github.com/preservim/nerdtree'
@@ -217,16 +217,29 @@ cmp.setup.cmdline(':', {
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
 -- require('lspconfig')['clangd'].setup { }
-require'lspconfig'.clangd.setup{
-capabilities = capabilities,
-on_attach = on_attach,
-	cmd = {
-	'clangd',
-	-- '--compile-commands-dir=d:\\ATemp\\Test_Lsp\\Dev-Lessons\\TnlDemo\\',
-	},
+--require'lspconfig'.clangd.setup{
+--capabilities = capabilities,
+--on_attach = on_attach,
+--	cmd = {
+--	-- 'clangd',
+--	-- '--compile-commands-dir=d:\\ATemp\\Test_Lsp\\Dev-Lessons\\TnlDemo\\',
+--	},
+--}
+
+require('lualine').setup {
+  options = {
+    theme = 'gruvbox'
+  }
 }
 
-vim.diagnostic.disable()
+-- Esc 时切换到英文
+vim.api.nvim_set_keymap('i', '<Esc>', [[<Cmd>lua require('im_toggle').onEsc()<CR><Esc>]], { noremap = true, silent = true })
+-- 按 i 或 a 时切换到中文
+vim.api.nvim_create_autocmd("InsertEnter", {
+    callback = function()
+        require('im_toggle').onInsert()
+    end
+}) 
 EOF
 
 set backspace=indent,eol,start
@@ -235,11 +248,11 @@ syntax on
 "1 Monokai
 "2 desert
 "3 solarized
-let themechoose=1
+let themechoose=2
 if themechoose == 1
 colorscheme Monokai
 elseif themechoose == 2
-colorscheme Dark2
+colorscheme default
 elseif themechoose == 3
 colorscheme onedark
 else
@@ -261,7 +274,7 @@ set showtabline=2
 
 set grepprg=rg\ --vimgrep\ $*
 
-set guifont=Consolas:h13
+set guifont=Cascadia\ Mono:h13
 
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
